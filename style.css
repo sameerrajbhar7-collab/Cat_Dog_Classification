@@ -1,0 +1,383 @@
+/* ============================================================
+   Cat vs Dog Classifier — style.css
+   Dark glassmorphism theme with smooth animations
+   ============================================================ */
+
+/* ── Google Font ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Variables ───────────────────────────────────────── */
+:root {
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --border-subtle: #e2e8f0;
+  --accent-primary: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-light: #eff6ff;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --radius: 24px;
+  --radius-sm: 12px;
+  --transition: 0.3s ease;
+}
+
+/* ── Reset & Base ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px 60px;
+}
+
+/* ── Hero Header ─────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.hero .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: var(--accent-light);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 50px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.hero p {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+/* ── Glass Card ──────────────────────────────────────────── */
+.card {
+  width: 100%;
+  max-width: 620px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  box-shadow: var(--shadow);
+  transition: max-width var(--transition);
+}
+
+.card.has-result {
+  max-width: 900px;
+  display: flex;
+  gap: 40px;
+}
+
+.card-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-right {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+
+.card.has-result #upload-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card.has-result .upload-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .card.has-result {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* ── Upload Area ─────────────────────────────────────────── */
+.upload-area {
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  position: relative;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+  border-color: var(--accent-primary);
+  background: var(--accent-light);
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-icon {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.upload-area p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.upload-area .file-name {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  word-break: break-all;
+  min-height: 20px;
+}
+
+/* ── Submit Button ───────────────────────────────────────── */
+.btn-predict {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-primary), #60a5fa);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-predict:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-predict:active {
+  transform: translateY(0);
+}
+
+/* ── Error Banner ────────────────────────────────────────── */
+.alert-error {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  background: rgba(248, 113, 113, .12);
+  border: 1px solid rgba(248, 113, 113, .35);
+  color: #fca5a5;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Result Section ──────────────────────────────────────── */
+.result-section {
+  margin-top: 32px;
+}
+
+.card.has-result .result-section {
+  margin-top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .card.has-result .result-section {
+    margin-top: 32px;
+  }
+}
+
+.result-section h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+
+/* Uploaded image preview */
+.img-preview {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  max-height: 280px;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 22px;
+  display: block;
+  animation: fadeSlideIn .5s ease both;
+}
+
+/* Result badge */
+.result-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: var(--accent-light);
+  animation: fadeSlideIn .4s ease .1s both;
+}
+
+.result-badge .label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-badge .emoji {
+  font-size: 2.2rem;
+}
+
+.result-badge .class-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.result-badge .conf-pill {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent-primary);
+}
+
+/* Confidence progress bar */
+.conf-bar-wrap {
+  margin-top: 16px;
+  animation: fadeSlideIn .4s ease .2s both;
+}
+
+.conf-bar-wrap span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.conf-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--border-subtle);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.conf-bar-fill {
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--accent-primary), #60a5fa);
+  transition: width 1s cubic-bezier(.25, .8, .25, 1);
+}
+
+/* ── Try Again link ──────────────────────────────────────── */
+.try-again {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.try-again:hover {
+  opacity: 0.7;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  margin-top: 48px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeSlideIn .6s ease both;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+  }
+
+  .result-badge {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
